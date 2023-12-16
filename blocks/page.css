@@ -17,3 +17,23 @@
   flex-direction: column;
   min-height: 100vh;
 }
+
+@media screen and (max-width: 320px) {
+  .page__section {
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+  }
+}
+
+@media screen (max-width: 480px) {
+}
+
+@media screen and (max-width: 700px) {
+  .page__section {
+    max-width: calc(100% - 38px);
+  }
+}
+}
+
+@media screen and (max-width: 800px) {
+}
