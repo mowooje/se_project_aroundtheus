@@ -20,7 +20,7 @@
 
 @media screen and (max-width: 320px) {
   .page__section {
-    margin: 0 20px;
+    margin: 0 20px 0;
     max-width: calc(100% - 40px);
   }
 }
@@ -30,10 +30,13 @@
 
 @media screen and (max-width: 700px) {
   .page__section {
-    max-width: calc(100% - 38px);
+    max-width: calc(100% - 40px);
   }
 }
 }
 
 @media screen and (max-width: 800px) {
+  .page__content {
+    max-width: calc(100% - 80px);
+  }
 }
