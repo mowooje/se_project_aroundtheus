@@ -117,17 +117,9 @@
     column-gap: 0;
   }
 
-  .profile__title {
-    font-size: 22px;
-  }
-
   .profile__edit-button {
     width: 18px;
     height: 18px;
-  }
-
-  .profile__description {
-    font-size: 14px;
   }
 
   .profile__add-button {
