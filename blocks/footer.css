@@ -5,9 +5,10 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  max-width: 318px;
+  max-width: 880px;
+  width: 100%;
   min-height: 18px;
-  margin: 51px 0 60px 0;
+  margin: 51px auto 60px auto;
 }
 
 .footer__copyright {
@@ -15,7 +16,6 @@
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
-  margin: auto;
 }
 
 @media screen and (max-width: 620px) {
