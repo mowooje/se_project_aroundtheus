@@ -9,3 +9,7 @@ This is the third project of the Software Engineering program at TripleTen. It w
 - Grid Layouts
 - BEM file structure
 - Media Queries
+
+## Video Demonstration
+
+Link: https://drive.google.com/file/d/1Kw7ZnJHtbh3fetJ7YfJn0pJVSFmpSxJC/view?usp=drive_link
