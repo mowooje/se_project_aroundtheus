@@ -7,7 +7,6 @@
   line-height: normal;
   max-width: 880px;
   width: 100%;
-  min-height: 18px;
   margin: 51px auto 60px auto;
 }
 
@@ -24,21 +23,9 @@
   }
 
   .footer__copyright {
-    margin-top: 19px;
-    margin-left: 19px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .footer {
-    margin: 0;
-    max-width: 282px;
-  }
-
-  .footer__copyright {
     font-size: 14px;
-    line-height: 17px;
-    margin-top: 19px;
-    margin-left: 19px;
+    line-height: 1.2;
+    margin: 0 0 0 19px;
+    padding: 48px 0 36px;
   }
 }
