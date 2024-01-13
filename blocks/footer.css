@@ -7,7 +7,7 @@
   line-height: normal;
   max-width: 880px;
   width: 100%;
-  margin: 51px auto 60px auto;
+  margin: 51px auto 0 auto;
 }
 
 .footer__copyright {
@@ -16,6 +16,7 @@
   line-height: 22px;
   font-weight: 400;
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 @media screen and (max-width: 620px) {
