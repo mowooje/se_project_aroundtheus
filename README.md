@@ -10,6 +10,10 @@ This is the third project of the Software Engineering program at TripleTen. It w
 - BEM file structure
 - Media Queries
 
+## Link to Github Page Website
+
+https://mowooje.github.io/se_project_aroundtheus/
+
 ## Video Demonstration
 
 Link: https://drive.google.com/file/d/1Kw7ZnJHtbh3fetJ7YfJn0pJVSFmpSxJC/view?usp=drive_link
