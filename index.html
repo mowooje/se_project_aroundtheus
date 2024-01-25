@@ -139,6 +139,33 @@
         <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
     </div>
+    <div class="modal">
+      <div class="modal__container">
+        <button class="modal__close"></button>
+        <p class="modal__heading">Edit Profile</p>
+        <form class="modal__form">
+          <input
+            type="text"
+            name="title"
+            id="name"
+            placeholder="Jacques Cousteau"
+            class="modal__input"
+            required
+          />
+          <input
+            type="text"
+            name="description"
+            id="explorer"
+            placeholder="Explorer"
+            class="modal__input"
+            required
+          />
+          <button type="button" id="cardModalbutton" class="modal__button">
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
