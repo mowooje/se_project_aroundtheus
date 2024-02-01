@@ -33,7 +33,9 @@
               aria-label="profile__edit-button"
               id="profile__edit-button "
             ></button>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description" id="profile__description">
+              Explorer
+            </p>
           </div>
           <button
             class="profile__add-button"
@@ -42,7 +44,7 @@
           ></button>
         </section>
         <section class="cards page__section">
-          <ul class="cards__list">
+          <ul class="cards__list" id="cards-list">
             <li class="card">
               <img
                 src=".//images/yosemite-valley.jpg"
@@ -140,15 +142,15 @@
         <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
     </div>
-    <div class="modal">
+    <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
-        <button class="modal__close"></button>
+        <button class="modal__close" id="modal-close-button"></button>
         <p class="modal__heading">Edit Profile</p>
-        <form class="modal__form">
+        <form class="modal__form" id="profile-edit-form">
           <input
             type="text"
             name="title"
-            id="name"
+            id="edit-profile-modal-title"
             placeholder="Name"
             class="modal__input"
             required
@@ -156,12 +158,16 @@
           <input
             type="text"
             name="description"
-            id="explorer"
+            id="edit-profile-modal-description"
             placeholder="Description"
             class="modal__input"
             required
           />
-          <button type="button" id="cardModalbutton" class="modal__button">
+          <button
+            type="button"
+            id="edit-profile-modal-save-button"
+            class="modal__button"
+          >
             Save
           </button>
         </form>
