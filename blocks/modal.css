@@ -99,6 +99,11 @@
   color: #fff;
 }
 
+.modal__button:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
 @media screen and (max-width: 620px) {
   .modal__container {
     padding: 25px 20px;

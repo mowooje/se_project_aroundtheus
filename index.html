@@ -31,7 +31,7 @@
               class="profile__edit-button"
               type="button"
               aria-label="profile__edit-button"
-              id="profile__edit-button"
+              id="profile-edit-button"
             ></button>
             <p class="profile__description" id="profile__description">
               Explorer
@@ -44,98 +44,7 @@
           ></button>
         </section>
         <section class="cards page__section">
-          <ul class="cards__list" id="cards-list">
-            <li class="card">
-              <img
-                src=".//images/yosemite-valley.jpg"
-                alt="Shot of the Yosemite"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Yosemite</h2>
-                <button
-                  class="card__like-button"
-                  type="button"
-                  aria-label="card__like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src=".//images/lake-louise.jpg"
-                alt="Shot of Lake Louise"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Lake Louise</h2>
-                <button
-                  class="card__like-button"
-                  type="button"
-                  aria-label="card__like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src=".//images/bald-mountains.jpg"
-                alt="Shot of Bald Mountains"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Bald Mountains</h2>
-                <button
-                  class="card__like-button"
-                  type="button"
-                  aria-label="card__like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src=".//images/latemar.jpg"
-                alt="Photo of Latemar"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Latemar</h2>
-                <button
-                  class="card__like-button"
-                  type="button"
-                  aria-label="card__like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src=".//images/vanoise.jpg"
-                alt="Photo of Vanoise National Park"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Vanoise National Park</h2>
-                <button
-                  class="card__like-button"
-                  type="button"
-                  aria-label="card__like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src=".//images/lago-di-braies.jpg"
-                alt="Shot of Lago di Braies"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Lago di Braies</h2>
-                <button
-                  class="card__like-button"
-                  type="button"
-                  aria-label="card__like-button"
-                ></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="cards__list" id="cards-list"></ul>
         </section>
       </main>
       <footer class="footer page__section">
@@ -150,7 +59,7 @@
           <input
             type="text"
             name="title"
-            id="edit-profile-modal-title"
+            id="profile-title-input"
             placeholder="Name"
             class="modal__input"
             required
@@ -158,21 +67,27 @@
           <input
             type="text"
             name="description"
-            id="edit-profile-modal-description"
+            id="profile-description-input"
             placeholder="Description"
             class="modal__input"
             required
           />
-          <button
-            type="button"
-            id="edit-profile-modal-save-button"
-            class="modal__button"
-          >
-            Save
-          </button>
+          <button type="button" class="modal__button" id="profile">Save</button>
         </form>
       </div>
     </div>
+    <template id="card-template">
+      <li class="card">
+        <img src="" alt="" class="card__image" />
+        <div class="card__description">
+          <h2 class="card__title"></h2>
+          <button
+            class="card__like-button"
+            type="button"
+            aria-label="card__like-button"
+          ></button>
+        </div></li
+    ></template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
