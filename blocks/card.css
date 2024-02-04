@@ -49,3 +49,21 @@
   opacity: 0.5;
   cursor: pointer;
 }
+
+.card__delete-button {
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  background-image: url(../images/icons/delete-icon.png);
+  width: 18px;
+  height: 19px;
+  top: 18px;
+  right: 15px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+}
+
+.card__delete-button:hover {
+  opacity: 0.5;
+}
