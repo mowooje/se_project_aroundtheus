@@ -117,6 +117,10 @@
     column-gap: 0;
   }
 
+  .profile__title {
+    margin-left: 0;
+  }
+
   .profile__edit-button {
     width: 18px;
     height: 18px;

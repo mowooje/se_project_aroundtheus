@@ -44,7 +44,7 @@
           ></button>
         </section>
         <section class="cards page__section">
-          <ul class="cards__list" id="cards-list"></ul>
+          <ul class="cards__list"></ul>
         </section>
       </main>
       <footer class="footer page__section">
@@ -72,14 +72,15 @@
             class="modal__input"
             required
           />
-          <button type="button" class="modal__button" id="profile">Save</button>
+          <button type="button" class="modal__button" id="edit-save-button">
+            Save
+          </button>
         </form>
       </div>
     </div>
     <template id="card-template">
       <li class="card">
         <img src="" alt="" class="card__image" />
-        <button class="card__delete-button" type="button"></button>
         <div class="card__description">
           <h2 class="card__title"></h2>
           <button
