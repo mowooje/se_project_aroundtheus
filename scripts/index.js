@@ -72,7 +72,7 @@ profileEditButton.addEventListener("click", () => {
 
 profileEditCloseButton.addEventListener("click", closePopop);
 
-profileEditForm.addEventListener("subimt", handleProfileEditSubmit);
+profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
