@@ -42,7 +42,7 @@ const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
 /* Functions */
-function closePopop() {
+function closePopUp() {
   profileEditModal.classList.remove("modal__opened");
 }
 
