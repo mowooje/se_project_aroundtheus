@@ -53,13 +53,13 @@ function handleProfileEditSubmit(e) {
   closePopUp();
 }
 
-function getCardElement(Data) {
+function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
-  cardTitleEl.textContent = Data.name;
-  cardImageEl.src = Data.link;
-  cardImageEl.alt = Data.link;
+  cardTitleEl.textContent = data.name;
+  cardImageEl.src = data.link;
+  cardImageEl.alt = data.link;
   return cardElement;
 }
 
