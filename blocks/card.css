@@ -50,15 +50,19 @@
   cursor: pointer;
 }
 
-.card__delete-button {
+.card__like-button_active {
+  background-image: url("../images/Union.svg");
+  opacity: 1;
+}
+
+.card__trash-button {
   cursor: pointer;
   display: flex;
   position: absolute;
-  background-image: url(../images/icons/delete-icon.png);
+  background-image: url(../images/Trash.svg);
   width: 18px;
   height: 19px;
-  top: 18px;
-  right: 15px;
+  margin: 18px 249px 0;
   background-repeat: no-repeat;
   background-color: transparent;
   border: none;
@@ -66,4 +70,5 @@
 
 .card__delete-button:hover {
   opacity: 0.5;
+  cursor: pointer;
 }

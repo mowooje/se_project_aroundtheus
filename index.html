@@ -79,6 +79,7 @@
         </form>
       </div>
     </div>
+
     <!-- Add card modal -->
     <div class="modal" id="add-card-modal">
       <div class="modal__container">
@@ -107,9 +108,20 @@
         </form>
       </div>
     </div>
+
+    <!-- Preview Modal-->
+    <div class="modal" id="modal-preview">
+      <div class="modal__container modal__preview">
+        <button class="modal__close" id="preview-modal-close"></button>
+        <img src="" alt="" class="modal__preview-image" />
+        <h2 class="modal__preview-description"></h2>
+      </div>
+    </div>
+
     <template id="card-template">
       <li class="card">
         <img src="" alt="" class="card__image" />
+        <button type="button" class="card__trash-button"></button>
         <div class="card__description">
           <h2 class="card__title"></h2>
           <button

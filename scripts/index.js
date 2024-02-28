@@ -56,6 +56,16 @@ const cardDeleteCloseButton = document.querySelector("trash-button");
 
 /* ------------------------------------------------------------------------------- */
 
+/* Preview Elements */
+const previewCardModal = document.querySelector("#modal-preview");
+const previewImage = document.querySelector(".modal__preview-image");
+const previewDescription = document.querySelector(
+  ".modal__preview-description"
+);
+const previewCloseButton = previewCardModal.querySelector("button");
+
+/* ------------------------------------------------------------------------------- */
+
 /* Functions */
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
@@ -91,6 +101,24 @@ function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
+  const likeButton = cardElement.querySelector(".card__like-button");
+  const trashButton = cardElement.querySelector(".card__trash-button");
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
+
+  trashButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
+  cardImageEl.addEventListener("click", () => {
+    openModal(previewCardModal);
+    previewImage.src = data.link;
+    previewDescription.textContent = data.name;
+    previewImage.alt = `{data.name}`;
+  });
+
   cardTitleEl.textContent = data.name;
   cardImageEl.src = data.link;
   cardImageEl.alt = data.link;
@@ -110,6 +138,10 @@ profileEditButton.addEventListener("click", () => {
 profileEditCloseButton.addEventListener("click", () =>
   closeModal(profileEditModal)
 );
+
+previewCloseButton.addEventListener("click", () => {
+  closeModal(previewCardModal);
+});
 
 /* Form Listenser */
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
