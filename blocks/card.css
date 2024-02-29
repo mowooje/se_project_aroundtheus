@@ -15,6 +15,10 @@
   object-position: center;
 }
 
+.card__image:hover {
+  cursor: pointer;
+}
+
 .card__description {
   display: flex;
   justify-content: space-between;
