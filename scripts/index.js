@@ -55,6 +55,7 @@ const cardTitleInput = document.querySelector("#card-title-input");
 const cardUrlInput = document.querySelector("#card-url-input");
 const cardDeleteButton = document.querySelector("card__trash-button");
 const cardDeleteCloseButton = document.querySelector("trash-button");
+const modalForms = document.querySelectorAll(".modal__form");
 
 /* ------------------------------------------------------------------------------- */
 
@@ -69,11 +70,14 @@ const previewCloseButton = previewCardModal.querySelector("button");
 /* ------------------------------------------------------------------------------- */
 
 /* Functions */
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-}
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscapeKey);
+}
+
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscapeKey);
 }
 
 function handleProfileEditSubmit(e) {
@@ -88,6 +92,13 @@ function handleAddCardSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   const data = { name, link };
+
+  function handleEscapeKey(evt) {
+    if (evt.key === "Escape") {
+      const modal = document.querySelector(".modal_opened");
+      closeModal(modal);
+    }
+  }
 
   const newCard = getCardElement(data);
   cardListEl.prepend(newCard);
