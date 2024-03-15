@@ -50,30 +50,48 @@
       <footer class="footer page__section">
         <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
+
       <!-- Edit modal -->
     </div>
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
-        <button class="modal__close" id="modal-close-button"></button>
+        <button
+          type="button"
+          class="modal__close"
+          id="modal-close-button"
+        ></button>
         <h3 class="modal__heading">Edit Profile</h3>
         <form class="modal__form" id="profile-edit-form">
           <input
             type="text"
             name="title"
-            id="profile-title-input"
             placeholder="Name"
             class="modal__input"
+            id="profile-title-input"
+            minlength="2"
+            maxlength="40"
             required
           />
+          <span class="modal__error" id="profile-title-input-error"></span>
           <input
             type="text"
             name="description"
-            id="profile-description-input"
             placeholder="Description"
             class="modal__input"
+            id="profile-description-input"
+            minlength="2"
+            maxlength="200"
             required
           />
-          <button type="submit" class="modal__button" id="edit-save-button">
+          <span
+            class="modal__error"
+            id="profile-description-input-error"
+          ></span>
+          <button
+            type="submit"
+            class="modal__button modal__button_disabled"
+            id="edit-save-button"
+          >
             Save
           </button>
         </form>
@@ -89,20 +107,28 @@
           <input
             type="text"
             name="title"
-            id="card-title-input"
             placeholder="Title"
-            class="modal__input"
+            class="modal__input modal__input_type_name"
+            id="card-title-input"
+            minlength="1"
+            maxlength="30"
             required
           />
+          <span class="modal__error" id="profile-title-input-error"></span>
           <input
             type="text"
             name="url"
-            id="card-url-input"
             placeholder="Image URL"
             class="modal__input"
+            id="card-url-input"
             required
           />
-          <button type="submit" class="modal__button" id="add-save-button">
+          <span class="modal__error" id="modal-url-error"></span>
+          <button
+            class="modal__button modal__button_disabled"
+            disabled
+            type="submit"
+          >
             Create
           </button>
         </form>
@@ -112,12 +138,17 @@
     <!-- Preview Modal-->
     <div class="modal" id="modal-preview">
       <div class="modal__container modal__preview">
-        <button class="modal__close" id="preview-modal-close"></button>
+        <button
+          type="button"
+          class="modal__close"
+          id="preview-modal-close"
+        ></button>
         <img src="" alt="" class="modal__preview-image" />
         <h2 class="modal__preview-description"></h2>
       </div>
     </div>
 
+    <! -- Template -->
     <template id="card-template">
       <li class="card">
         <img src="" alt="" class="card__image" />
@@ -132,5 +163,6 @@
         </div></li
     ></template>
     <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validation.js" defer></script>
   </body>
 </html>

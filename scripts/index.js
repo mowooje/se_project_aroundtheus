@@ -158,3 +158,20 @@ initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   cardListEl.append(cardElement);
 });
+
+/* ------------------------------------------------------------------------------- */
+
+/* Popup Escape */
+
+function closeModalOnRemoteClick(evt) {
+  if (
+    evt.target === evt.currentTarget ||
+    evt.target.classList.contains("modal__close")
+  ) {
+    closeModal(evt.target);
+  }
+}
+
+profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
+addNewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
+previewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
