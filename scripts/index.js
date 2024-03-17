@@ -70,6 +70,13 @@ const previewCloseButton = previewCardModal.querySelector("button");
 /* ------------------------------------------------------------------------------- */
 
 /* Functions */
+function handleEscapeKey(evt) {
+  if (evt.key === "Escape") {
+    const modal = document.querySelector(".modal_opened");
+    closeModal(modal);
+  }
+}
+
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscapeKey);
@@ -92,13 +99,6 @@ function handleAddCardSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   const data = { name, link };
-
-  function handleEscapeKey(evt) {
-    if (evt.key === "Escape") {
-      const modal = document.querySelector(".modal_opened");
-      closeModal(modal);
-    }
-  }
 
   const newCard = getCardElement(data);
   cardListEl.prepend(newCard);
@@ -162,12 +162,6 @@ addCardCloseButton.addEventListener("click", () => closeModal(addNewCardModal));
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   cardListEl.prepend(cardElement);
-});
-
-/* For loop */
-initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  cardListEl.append(cardElement);
 });
 
 /* ------------------------------------------------------------------------------- */
