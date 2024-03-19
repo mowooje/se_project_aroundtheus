@@ -103,24 +103,24 @@
       <div class="modal__container">
         <button class="modal__close" id="card-modal-close-button"></button>
         <h3 class="modal__heading">New Place</h3>
-        <form class="modal__card-form modal__form" id="add-card-form">
+        <form class="modal__card-form modal__form" id="modal-name-form">
           <input
             type="text"
             name="title"
             placeholder="Title"
             class="modal__input modal__input_type_name"
-            id="card-title-input"
+            id="modal-name"
             minlength="1"
             maxlength="30"
             required
           />
-          <span class="modal__error" id="profile-title-input-error"></span>
+          <span class="modal__error" id="modal-name-error"></span>
           <input
             type="text"
             name="url"
             placeholder="Image URL"
-            class="modal__input"
-            id="card-url-input"
+            class="modal__input modal__input_type_url"
+            id="modal-url"
             required
           />
           <span class="modal__error" id="modal-url-error"></span>
