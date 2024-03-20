@@ -99,7 +99,6 @@ function handleAddCardSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   const data = { name, link };
-
   const newCard = getCardElement(data);
   cardListEl.prepend(newCard);
   e.target.reset();
