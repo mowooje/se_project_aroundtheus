@@ -51,8 +51,8 @@ const addCardCloseButton = addNewCardModal.querySelector(
   "#card-modal-close-button"
 );
 const addCardSubmit = addNewCardModal.querySelector("#add-save-button");
-const cardTitleInput = document.querySelector("#card-title-input");
-const cardUrlInput = document.querySelector("#card-url-input");
+const cardTitleInput = document.querySelector(".modal__input_type_name");
+const cardUrlInput = document.querySelector(".modal__input_type_url");
 const cardDeleteButton = document.querySelector("card__trash-button");
 const cardDeleteCloseButton = document.querySelector("trash-button");
 const modalForms = document.querySelectorAll(".modal__form");
