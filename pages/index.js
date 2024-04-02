@@ -1,3 +1,6 @@
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -24,6 +27,11 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
   },
 ];
+
+const cardData = {
+  name: "Yosemite Valley",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+};
 
 /* Elements */
 const profileEditButton = document.querySelector("#profile-edit-button");
@@ -87,6 +95,22 @@ function closeModal(modal) {
   document.removeEventListener("keydown", handleEscapeKey);
 }
 
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__form-input_error",
+  errorClass: "modal__error_visible",
+};
+
+const forms = document.querySelectorAll(config.formSelector);
+
+forms.forEach((form) => {
+  const formValidator = new FormValidator(config, form);
+  formValidator.enableValidation();
+});
+
 function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value.trim();
@@ -94,15 +118,27 @@ function handleProfileEditSubmit(e) {
   closeModal(profileEditModal);
 }
 
+function handleImageClick(cardData) {
+  openPopUp(previewImageModal);
+  previewImage.src = cardData.link;
+  previewImageTitle.textContent = cardData.name;
+  previewImage.setAttribute("alt", cardData.name);
+}
+
 function handleAddCardSubmit(e) {
   e.preventDefault();
+  const cardTitleInput = addCardFormElement.querySelector("#name");
+  const cardUrlInput = addCardFormElement.querySelector("#url");
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
-  const data = { name, link };
-  const newCard = getCardElement(data);
-  cardListEl.prepend(newCard);
-  e.target.reset();
-  closeModal(addNewCardModal);
+  const cardElement = new Card(
+    { name, link },
+    "#card-template",
+    handleImageClick
+  );
+  cardListEl.prepend(cardElement.getView());
+  addCardFormElement.reset();
+  closePopup(addCardModal);
 }
 
 function getCardElement(data) {
