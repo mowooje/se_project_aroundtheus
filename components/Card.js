@@ -19,7 +19,7 @@ export default class Card {
       });
 
     this._cardElement
-      .querySelector("#card__iamge")
+      .querySelector("#card-image")
       .addEventListener("click", () => {
         this._handleImageClick(this._data);
       });
@@ -46,7 +46,9 @@ export default class Card {
     cardImageEl.src = this._data.link;
     cardImageEl.alt = this._data.name;
     cardTitleEl.textContent = this._data.name;
+
     this._setEventListeners();
+
     return this._cardElement;
   }
 }
