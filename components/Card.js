@@ -15,7 +15,7 @@ export default class Card {
     this._cardElement
       .querySelector("#card__trash-button")
       .addEventListener("click", () => {
-        this._handleDeleteCard();
+        this._handleDeleteButton();
       });
 
     this._cardElement
