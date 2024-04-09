@@ -159,7 +159,7 @@ function handleAddCardSubmit(data) {
   const link = data.target.link.value;
   const Card = createCard({ name, link });
   cardListEl.prepend(Card);
-  closeModal(addCardModal);
+  closeModal(addNewCardModal);
 }
 
 /* ------------------------------------------------------------------------------- */
