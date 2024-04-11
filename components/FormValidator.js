@@ -8,6 +8,7 @@ export default class FormValidator {
     this._errorClass = settings.errorClass;
 
     this._form = formElement;
+    this.inputEls = [];
   }
 
   _showInputError(inputEl) {
