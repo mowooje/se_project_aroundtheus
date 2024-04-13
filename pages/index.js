@@ -44,6 +44,9 @@ const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 const cardListEl = document.querySelector(".cards__list");
 
+const profileEditFormValidator = new FormValidator(config, profileEditForm);
+const addCardFormValidator = new FormValidator(config, addCardForm);
+
 /* ------------------------------------------------------------------------------- */
 
 /* Add Buttons */
@@ -106,9 +109,20 @@ previewCloseButton.addEventListener("click", () => {
   closeModal(previewCardModal);
 });
 
+profileEditButton.addEventListener("click", () => {
+  profileTitleInput.value = profileTitle.textContent;
+  profileDescriptionInput.value = profileDescription.textContent.trim();
+  openModal(profileEditModal);
+  profileEditFormValidator.resetValidation(); // Call resetValidation() for profile edit form
+});
+
 /* Form Listenser */
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardForm.addEventListener("submit", handleAddCardSubmit);
+addCardButton.addEventListener("click", () => {
+  openModal(addNewCardModal);
+  addCardFormValidator.resetValidation(); // Call resetValidation() for add card form
+});
 
 // add new card
 addCardButton.addEventListener("click", () => openModal(addNewCardModal));
@@ -150,16 +164,18 @@ forms.forEach((form) => {
 });
 
 function createCard(data) {
-  const cardElement = new Card(data, "#card-template", handleImageClick);
+  const cardElement = new card(data, "#card-template", handleImageClick);
   return cardElement.getView();
 }
 
 function handleAddCardSubmit(data) {
   const name = data.target.name.value;
   const link = data.target.link.value;
-  const Card = createCard({ name, link });
-  cardListEl.prepend(Card);
+  const card = createcard({ name, link });
+  cardListEl.prepend(card);
   closeModal(addNewCardModal);
+  formValidators["add-card-form"].disableSubmitButton();
+  addCardForm.reset();
 }
 
 /* ------------------------------------------------------------------------------- */
@@ -171,7 +187,7 @@ function closeModalOnRemoteClick(evt) {
     evt.target === evt.currentTarget ||
     evt.target.classList.contains("modal__close")
   ) {
-    closeModal(evt.target);
+    closeModal(evt.currentTarget);
   }
 }
 
