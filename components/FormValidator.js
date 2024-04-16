@@ -69,19 +69,19 @@ export default class FormValidator {
   }
 
   enableValidation() {
+    this._setEventListeners();
     this._form.addEventListener("submit", (e) => {
       e.preventDefault();
       this.disableButton();
     });
 
-    this._setEventListeners();
     this.toggleButtonState();
   }
 
   resetValidation() {
-    this._toggleButtonState();
-    this._inputList.forEach((inputElement) => {
-      this._hideError(inputElement);
+    if (this._inputEls) this.toggleButtonState();
+    this._inputEls.forEach((inputElement) => {
+      this._hideInputError(inputElement);
     });
   }
 
