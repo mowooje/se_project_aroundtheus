@@ -8,7 +8,9 @@ export default class FormValidator {
     this._errorClass = settings.errorClass;
 
     this._form = formElement;
-    this.inputEls = [];
+    this.inputEls = Array.from(
+      this._form.querySelectorAll(this._inputSelector)
+    );
   }
 
   _showInputError(inputEl) {
@@ -79,7 +81,7 @@ export default class FormValidator {
   }
 
   resetValidation() {
-    if (this._inputEls) this.toggleButtonState();
+    this.toggleButtonState();
     this._inputEls.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
