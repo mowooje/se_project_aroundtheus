@@ -88,7 +88,13 @@ profileEditButton.addEventListener("click", () => openModal(profileEditForm));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardButton.addEventListener("click", () => openModal(addNewCardModal));
 addCardForm.addEventListener("submit", handleAddCardSubmit);
+profileEditForm.querySelectorAll(".modal__input").forEach((input) => {
+  input.setAttribute("name", `profile-edit-${input.getAttribute("name")}`);
+});
 
+addCardForm.querySelectorAll(".modal__input").forEach((input) => {
+  input.setAttribute("name", `add-card-${input.getAttribute("name")}`);
+});
 /* ------------------------------------------------------------------------------- */
 
 /* Event Listener */
@@ -137,6 +143,8 @@ const config = {
 const profileEditFormValidator = new FormValidator(config, profileEditForm);
 const addCardFormValidator = new FormValidator(config, addCardForm);
 
+addCardFormValidator.enableValidation();
+
 function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value.trim();
@@ -156,25 +164,23 @@ initialCards.forEach((cardData) => {
   cardListEl.prepend(cardView);
 });
 
-const forms = document.querySelectorAll(config.formSelector);
-
-forms.forEach((form) => {
-  const formValidator = new FormValidator(config, form);
-  formValidator.enableValidation();
-});
-
 function createCard(data) {
   const cardElement = new Card(data, "#card-template", handleImageClick);
   return cardElement.getView();
 }
 
-function handleAddCardSubmit(data) {
-  const name = data.target.name.value;
-  const link = data.target.link.value;
-  const card = createcard({ name, link });
+function handleAddCardSubmit(event) {
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+
+  const name = formData.get("name");
+  const link = formData.get("link");
+
+  const card = createCard({ name, link });
   cardListEl.prepend(card);
+
   closeModal(addNewCardModal);
-  formValidators["add-card-form"].disableSubmitButton();
   addCardForm.reset();
 }
 
