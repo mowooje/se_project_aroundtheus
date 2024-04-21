@@ -174,8 +174,8 @@ function handleAddCardSubmit(event) {
 
   const formData = new FormData(event.target);
 
-  const name = formData.get("name");
-  const link = formData.get("link");
+  const name = formData.get("add-card-name");
+  const link = formData.get("add-card-link");
 
   const card = createCard({ name, link });
   cardListEl.prepend(card);
