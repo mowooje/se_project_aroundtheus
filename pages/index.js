@@ -99,15 +99,11 @@ profileEditButton.addEventListener("click", () => {
 });
 
 /* Form Listenser */
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-addCardForm.addEventListener("submit", handleAddCardSubmit);
 addCardButton.addEventListener("click", () => {
   openModal(addNewCardModal);
-  addCardFormValidator.resetValidation();
 });
 
 // add new card
-addCardButton.addEventListener("click", () => openModal(addNewCardModal));
 
 const config = {
   formSelector: ".modal__form",
@@ -153,8 +149,8 @@ function handleAddCardSubmit(event) {
 
   const formData = new FormData(event.target);
 
-  const name = formData.get("add-card-name");
-  const link = formData.get("add-card-link");
+  const name = formData.get("name");
+  const link = formData.get("link");
 
   const card = createCard({ name, link });
   cardListEl.prepend(card);
