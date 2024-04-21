@@ -88,13 +88,7 @@ profileEditButton.addEventListener("click", () => openModal(profileEditForm));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardButton.addEventListener("click", () => openModal(addNewCardModal));
 addCardForm.addEventListener("submit", handleAddCardSubmit);
-profileEditForm.querySelectorAll(".modal__input").forEach((input) => {
-  input.setAttribute("name", `profile-edit-${input.getAttribute("name")}`);
-});
 
-addCardForm.querySelectorAll(".modal__input").forEach((input) => {
-  input.setAttribute("name", `add-card-${input.getAttribute("name")}`);
-});
 /* ------------------------------------------------------------------------------- */
 
 /* Event Listener */
@@ -102,21 +96,6 @@ profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent.trim();
   openModal(profileEditModal);
-});
-
-profileEditCloseButton.addEventListener("click", () =>
-  closeModal(profileEditModal)
-);
-
-previewCloseButton.addEventListener("click", () => {
-  closeModal(previewCardModal);
-});
-
-profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent.trim();
-  openModal(profileEditModal);
-  profileEditFormValidator.resetValidation();
 });
 
 /* Form Listenser */
@@ -129,7 +108,6 @@ addCardButton.addEventListener("click", () => {
 
 // add new card
 addCardButton.addEventListener("click", () => openModal(addNewCardModal));
-addCardCloseButton.addEventListener("click", () => closeModal(addNewCardModal));
 
 const config = {
   formSelector: ".modal__form",
@@ -143,6 +121,7 @@ const config = {
 const profileEditFormValidator = new FormValidator(config, profileEditForm);
 const addCardFormValidator = new FormValidator(config, addCardForm);
 
+profileEditFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
 function handleProfileEditSubmit(e) {

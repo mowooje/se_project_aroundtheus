@@ -8,9 +8,6 @@ export default class FormValidator {
     this._errorClass = settings.errorClass;
 
     this._form = formElement;
-    this.inputEls = Array.from(
-      this._form.querySelectorAll(this._inputSelector)
-    );
   }
 
   _showInputError(inputEl) {
@@ -85,10 +82,5 @@ export default class FormValidator {
     this._inputEls.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
-  }
-
-  disableSubmitButton() {
-    this._submitButton.classList.add(this._inactiveButtonClass);
-    this._submitButton.disabled = true;
   }
 }
