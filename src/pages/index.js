@@ -47,8 +47,8 @@ const cardSelector = "#card-template";
 /* ------------------------------------------------------------------------------- */
 
 const userInfo = new UserInfo({
-  profileTitle: ".modal__input_type_title",
-  profileDescription: ".modal__input_type_description",
+  profileTitle: ".profile__title",
+  profileDescription: ".profile__description",
 });
 
 /* ------------------------------------------------------------------------------- */
@@ -71,9 +71,7 @@ function closeModal(modal) {
   document.removeEventListener("keydown", handleEscapeKey);
 }
 
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardButton.addEventListener("click", () => openModal(addNewCardModal));
-addCardForm.addEventListener("submit", handleAddCardSubmit);
 
 /* ------------------------------------------------------------------------------- */
 
@@ -151,16 +149,17 @@ function handleAddCardSubmit(event) {
   event.preventDefault();
 
   const formData = new FormData(event.target);
-
   const name = formData.get("name");
   const link = formData.get("link");
 
-  const card = createCard({ name, link });
-  cardListEl.prepend(card);
+  renderCard({ name, link });
 
   closeModal(addNewCardModal);
   addCardForm.reset();
 }
+
+closeModal(addNewCardModal);
+addCardForm.reset();
 
 const cardSection = new Section(
   {
