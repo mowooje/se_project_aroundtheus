@@ -2,10 +2,10 @@ import "../pages/index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
-import PopUpWithForm from "../components/PopUpWithForm.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 import { initialCards } from "../utils/constant.js";
-import PopUpWithImage from "../components/PopUpWithImage.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
 /* Elements */
 const profileEditButton = document.querySelector("#profile-edit-button");
@@ -101,13 +101,13 @@ const addCardFormValidator = new FormValidator(config, addCardForm);
 profileEditFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
-const editModal = new PopUpWithForm(
+const editModal = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit,
   config
 );
 
-const addModal = new PopUpWithForm(
+const addModal = new PopupWithForm(
   "#add-card-modal",
   handleAddCardSubmit,
   config
@@ -130,7 +130,7 @@ function handleImageClick(cardData) {
   openModal(document.querySelector("#modal-preview"));
 }
 
-const previewCardModal = new PopUpWithImage("#modal-preview");
+const previewCardModal = new PopupWithImage("#modal-preview");
 previewCardModal.setEventListeners();
 
 function createCard(data) {
