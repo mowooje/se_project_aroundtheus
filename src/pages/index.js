@@ -1,33 +1,11 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
 import "../pages/index.css";
-
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
-  },
-];
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import UserInfo from "../components/UserInfo.js";
+import PopUpWithForm from "../components/PopUpWithForm.js";
+import Section from "../components/Section.js";
+import { initialCards } from "../utils/constant.js";
+import PopUpWithImage from "../components/PopUpWithImage.js";
 
 /* Elements */
 const profileEditButton = document.querySelector("#profile-edit-button");
@@ -58,12 +36,20 @@ const addCardCloseButton = addNewCardModal.querySelector(
 /* ------------------------------------------------------------------------------- */
 
 /* Preview Elements */
-const previewCardModal = document.querySelector("#modal-preview");
 const previewImage = document.querySelector(".modal__preview-image");
 const previewDescription = document.querySelector(
   ".modal__preview-description"
 );
-const previewCloseButton = previewCardModal.querySelector("button");
+/* const previewCloseButton = previewCardModal.querySelector("button"); */
+
+const cardSelector = "#card-template";
+
+/* ------------------------------------------------------------------------------- */
+
+const userInfo = new UserInfo({
+  profileTitle: ".modal__input_type_title",
+  profileDescription: ".modal__input_type_description",
+});
 
 /* ------------------------------------------------------------------------------- */
 
@@ -115,6 +101,21 @@ const addCardFormValidator = new FormValidator(config, addCardForm);
 profileEditFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
+const editModal = new PopUpWithForm(
+  "#profile-edit-modal",
+  handleProfileEditSubmit,
+  config
+);
+
+const addModal = new PopUpWithForm(
+  "#add-card-modal",
+  handleAddCardSubmit,
+  config
+);
+
+editModal.setEventListeners();
+addModal.setEventListeners();
+
 function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value.trim();
@@ -123,21 +124,28 @@ function handleProfileEditSubmit(e) {
 }
 
 function handleImageClick(cardData) {
-  openModal(previewCardModal);
   previewImage.src = cardData.link;
   previewImage.setAttribute("alt", cardData.name);
   previewDescription.textContent = cardData.name;
+  openModal(document.querySelector("#modal-preview"));
 }
 
-initialCards.forEach((cardData) => {
-  const cardView = createCard(cardData);
-  cardListEl.prepend(cardView);
-});
+const previewCardModal = new PopUpWithImage("#modal-preview");
+previewCardModal.setEventListeners();
 
 function createCard(data) {
   const cardElement = new Card(data, "#card-template", handleImageClick);
   return cardElement.getView();
 }
+
+function renderCard(cardData) {
+  const cardView = createCard(cardData);
+  cardListEl.prepend(cardView);
+}
+
+initialCards.forEach((cardData) => {
+  renderCard(cardData);
+});
 
 function handleAddCardSubmit(event) {
   event.preventDefault();
@@ -154,6 +162,15 @@ function handleAddCardSubmit(event) {
   addCardForm.reset();
 }
 
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: renderCard,
+  },
+  ".cards__list"
+);
+cardSection.renderItems();
+
 /* ------------------------------------------------------------------------------- */
 
 /* Popup Escape */
@@ -169,4 +186,6 @@ function closeModalOnRemoteClick(evt) {
 
 profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
 addNewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
-previewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
+document
+  .querySelector("#modal-preview")
+  .addEventListener("mousedown", closeModalOnRemoteClick);
