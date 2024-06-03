@@ -50,6 +50,14 @@ const userInfo = new UserInfo({
 
 /* Functions */
 
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+}
+
+function openModal(modal) {
+  modal.classList.add("modal_opened");
+}
+
 addCardButton.addEventListener("click", () => {
   addModal.open();
 });
@@ -62,7 +70,6 @@ profileEditButton.addEventListener("click", () => {
   profileDescriptionInput.value = profileDescription.textContent.trim();
   openModal(profileEditModal);
 });
-
 // add new card
 
 const config = {
@@ -121,10 +128,6 @@ function renderCard(cardData) {
   cardListEl.prepend(cardView);
 }
 
-initialCards.forEach((cardData) => {
-  renderCard(cardData);
-});
-
 function handleAddCardSubmit(event) {
   event.preventDefault();
 
@@ -146,19 +149,3 @@ const cardSection = new Section(
 cardSection.renderItems();
 
 /* ------------------------------------------------------------------------------- */
-
-/* Popup Escape */
-
-function closeModalOnRemoteClick(evt) {
-  if (
-    evt.target === evt.currentTarget ||
-    evt.target.classList.contains("modal__close")
-  ) {
-    closeModal(evt.currentTarget);
-  }
-}
-
-addNewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
-document
-  .querySelector("#modal-preview")
-  .addEventListener("mousedown", closeModalOnRemoteClick);
