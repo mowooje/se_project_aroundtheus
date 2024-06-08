@@ -113,6 +113,7 @@ function handleImageClick(cardData) {
   previewImage.src = cardData.link;
   previewImage.setAttribute("alt", cardData.name);
   previewDescription.textContent = cardData.name;
+  previewCardModal.open(cardData);
 }
 
 const previewCardModal = new PopupWithImage("#modal-preview");
