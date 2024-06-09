@@ -50,14 +50,6 @@ const userInfo = new UserInfo({
 
 /* Functions */
 
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-}
-
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-}
-
 addCardButton.addEventListener("click", () => {
   addModal.open();
 });
@@ -66,7 +58,6 @@ addCardButton.addEventListener("click", () => {
 
 /* Event Listener */
 profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent.trim();
   openModal(profileEditModal);
 });
