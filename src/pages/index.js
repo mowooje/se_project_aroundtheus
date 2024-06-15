@@ -4,7 +4,7 @@ import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
-import { initialCards } from "../utils/constant.js";
+import { initialCards, config } from "../utils/constants";
 import PopupWithImage from "../components/PopupWithImage.js";
 
 /* Elements */
@@ -50,6 +50,14 @@ const userInfo = new UserInfo({
 
 /* Functions */
 
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+}
+
+function openModal(modal) {
+  modal.classList.add("modal_opened");
+}
+
 addCardButton.addEventListener("click", () => {
   addModal.open();
 });
@@ -58,19 +66,11 @@ addCardButton.addEventListener("click", () => {
 
 /* Event Listener */
 profileEditButton.addEventListener("click", () => {
+  profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent.trim();
   openModal(profileEditModal);
 });
 // add new card
-
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__form_input_error",
-  errorClass: "modal__error_visible",
-};
 
 const profileEditFormValidator = new FormValidator(config, profileEditForm);
 const addCardFormValidator = new FormValidator(config, addCardForm);
@@ -93,18 +93,14 @@ const addModal = new PopupWithForm(
 editModal.setEventListeners();
 addModal.setEventListeners();
 
-function handleProfileEditSubmit(e) {
-  e.preventDefault();
-  profileTitle.textContent = profileTitleInput.value.trim();
-  profileDescription.textContent = profileDescriptionInput.value.trim();
+function handleProfileEditSubmit(_inputValues) {
+  profileTitle.textContent;
+  profileDescription.textContent;
   closeModal(profileEditModal);
 }
 
-function handleImageClick(cardData) {
-  previewImage.src = cardData.link;
-  previewImage.setAttribute("alt", cardData.name);
-  previewDescription.textContent = cardData.name;
-  previewCardModal.open(cardData);
+function handleImageClick(name, link) {
+  previewCardModal.open(name, link);
 }
 
 const previewCardModal = new PopupWithImage("#modal-preview");
@@ -116,14 +112,14 @@ function createCard(data) {
 }
 
 function renderCard(cardData) {
-  const cardView = createCard(cardData);
-  cardListEl.prepend(cardView);
+  const addCard = new Card(cardData, cardSelector, handleImageClick);
+  return addCard.getView();
 }
 
-function handleAddCardSubmit(event) {
+function handleAddCardSubmit(_inputValues) {
   event.preventDefault();
 
-  const formData = new FormData(event.target);
+  const formData = new FormData(_inputValues);
   const name = formData.get("name");
   const link = formData.get("link");
 
