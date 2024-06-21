@@ -93,7 +93,7 @@ const addModal = new PopupWithForm(
 editModal.setEventListeners();
 addModal.setEventListeners();
 
-function handleProfileEditSubmit(_inputValues) {
+function handleProfileEditSubmit(inputValues) {
   profileTitle.textContent;
   profileDescription.textContent;
   closeModal(profileEditModal);
@@ -121,7 +121,6 @@ function handleAddCardSubmit(inputValues) {
 
   const name = inputValues.name;
   const link = inputValues.link;
-
   renderCard({ name, link });
   addModal.close();
 }
