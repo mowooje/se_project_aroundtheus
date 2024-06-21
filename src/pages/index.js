@@ -116,12 +116,11 @@ function renderCard(cardData) {
   return addCard.getView();
 }
 
-function handleAddCardSubmit(_inputValues) {
+function handleAddCardSubmit(inputValues) {
   event.preventDefault();
 
-  const formData = new FormData(_inputValues);
-  const name = formData.get("name");
-  const link = formData.get("link");
+  const name = inputValues.name;
+  const link = inputValues.link;
 
   renderCard({ name, link });
   addModal.close();
