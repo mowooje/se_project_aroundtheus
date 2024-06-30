@@ -94,8 +94,8 @@ editModal.setEventListeners();
 addModal.setEventListeners();
 
 function handleProfileEditSubmit(inputValues) {
-  profileTitle.textContent;
-  profileDescription.textContent;
+  profileTitle.textContent = inputValues.name;
+  profileDescription.textContent = inputValues.about;
   closeModal(profileEditModal);
 }
 
@@ -121,7 +121,8 @@ function handleAddCardSubmit(inputValues) {
 
   const name = inputValues.name;
   const link = inputValues.link;
-  renderCard({ name, link });
+  const cardEl = renderCard({ name, link });
+  cardSection.addItem(cardEl);
   addModal.close();
 }
 
