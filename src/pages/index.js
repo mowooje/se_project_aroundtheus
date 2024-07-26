@@ -58,9 +58,9 @@ addCardButton.addEventListener("click", () => {
 
 /* Event Listener */
 profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent.trim();
-  profileEditModal;
+  profileTitleInput.value = userInfo.getUserInfo().title;
+  profileDescriptionInput.value = userInfo.getUserInfo().title;
+  editModal.open();
 });
 // add new card
 
@@ -86,9 +86,8 @@ editModal.setEventListeners();
 addModal.setEventListeners();
 
 function handleProfileEditSubmit(inputValues) {
-  profileTitle.textContent = inputValues.title;
-  profileDescription.textContent = inputValues.description;
-  closeModal(profileEditModal);
+  userInfo.setUserInfo(inputValues);
+  editModal.close();
 }
 
 function handleImageClick(name, link) {
