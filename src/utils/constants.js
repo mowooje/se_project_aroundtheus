@@ -33,3 +33,53 @@ export const config = {
   inputErrorClass: "modal__form_input_error",
   errorClass: "modal__error_visible",
 };
+
+/* Profile Elements */
+export const profileEditModal = document.querySelector("#profile-edit-modal");
+export const profileTitle = document.querySelector(".profile__title");
+export const profileDescription = document.querySelector(
+  ".profile__description"
+);
+export const profileTitleInput = document.querySelector(
+  ".profile__title-input"
+);
+export const profileDescriptionInput = document.querySelector(
+  ".profile__description-input"
+);
+
+/* Add Card */
+export const addCardButton = document.querySelector(".add-card-button");
+export const addCardForm = document.querySelector(".add-card-form");
+export const addNewCardModal = document.querySelector("#add-card-modal");
+
+/* Preview Elements */
+export const previewImage = document.querySelector(".modal__preview-image");
+export const previewDescription = document.querySelector(
+  ".modal__preview-description"
+);
+
+/* Avatar Elements */
+export const profileAvatarButton = document.querySelector(
+  ".profile__avatar-button"
+);
+export const profileAvatarModal = document.querySelector("#avatar-modal");
+export const profileAvatarForm = document.querySelector(
+  ".profile__avatar-form"
+);
+
+/* Delete Elements */
+export const cardDeleteButton = document.querySelector(".card__trash-button");
+export const cardDeleteModal = document.querySelector("#delete-modal");
+export const cardDeleteForm = cardDeleteModal.querySelector(".modal__form");
+
+let profileEditButton;
+let profileEditForm;
+
+document.addEventListener("DOMContentLoaded", () => {
+  profileEditForm = document.querySelector("#profile-edit-form");
+  profileEditButton = document.querySelector(".profile__edit-button");
+
+  if (profileEditButton) {
+    profileEditButton.addEventListener("click", handleEditButtonClick);
+  }
+});

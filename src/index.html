@@ -148,6 +148,32 @@
       </div>
     </div>
 
+    <!--Avatar Modal-->
+    <div class="modal" id="avatar-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close"
+          type="button"
+          id="avatar-edit-button"
+        ></button>
+        <form class="modal__form">
+          <h1 class="modal__title">Avatar Picture</h1>
+          <input
+            type="url"
+            name="url"
+            id="avatar-picture"
+            class="modal__input modal__input_type_url"
+            placeholder="Avatar URL"
+            required
+          />
+          <span class="modal__error" id="avatar-picture-error"></span>
+          <button class="modal__button" type="submit" disabled>
+            <span class="modal__button-text">Save</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
     <!-- Template-->
     <template id="card-template">
       <li class="card">
@@ -167,5 +193,20 @@
           ></button>
         </div></li
     ></template>
+
+    <!--Delete Modal-->
+    <div class="modal" id="delete-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close"
+          type="button"
+          id="delete-card-modal-closed"
+        ></button>
+        <form class="modal__form">
+          <h2 class="modal__title">Do you want to delete?</h2>
+          <button class="modal__button" type="submit">Yes</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
