@@ -1,3 +1,4 @@
+import Api from "../components/Api.js";
 import "../pages/index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -44,7 +45,45 @@ const cardSelector = "#card-template";
 const userInfo = new UserInfo({
   profileTitle: ".profile__title",
   profileDescription: ".profile__description",
+  avatarSelector: ".profile__image",
 });
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "b0f5599c-4007-4941-89b3-30100c4f8838",
+    "Content-Type": "application/json",
+  },
+});
+
+let section;
+
+api;
+
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+  .then(([cards, data]) => {
+    section = new Section(
+      {
+        items: cards,
+        renderer: (data) => {
+          const cardEl = renderCard(data);
+          section.addItem(cardEl);
+        },
+      },
+      ".cards__list"
+    );
+    section.renderItems();
+
+    userInfo.setUserInfo({
+      title: data.name,
+      description: data.about,
+    });
+
+    userInfo.setAvatar({ avatar: data.avatar });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 /* ------------------------------------------------------------------------------- */
 
