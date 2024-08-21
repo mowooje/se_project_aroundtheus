@@ -13,7 +13,7 @@ import {
   profileDescription,
   profileTitleInput,
   profileDescriptionInput,
-  addCardButton,
+  profileAddButton,
   addCardForm,
   addNewCardModal,
   previewImage,
@@ -77,9 +77,13 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     console.log(err);
   });
 
-addCardButton.addEventListener("click", () => {
-  addModal.open();
-});
+if (profileAddButton) {
+  profileAddButton.addEventListener("click", () => {
+    addModal.open();
+  });
+} else {
+  console.error("profileAddButton not found in the DOM");
+}
 
 /* Event Listener */
 profileEditButton.addEventListener("click", () => {
@@ -142,6 +146,19 @@ function handleProfileEditSubmit(inputValues) {
 function handleImageClick(name, link) {
   previewCardModal.open(name, link);
 }
+
+function handleEditButtonClick() {
+  profileEditModal.classList.add("modal_opened");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  profileEditForm = document.querySelector("#profile-edit-form");
+  profileEditButton = document.querySelector(".profile__edit-button");
+
+  if (profileEditButton) {
+    profileEditButton.addEventListener("click", handleEditButtonClick);
+  }
+});
 
 const previewCardModal = new PopUpWithImage("#modal-preview");
 previewCardModal.setEventListeners();

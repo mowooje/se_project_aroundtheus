@@ -48,9 +48,10 @@ export const profileDescriptionInput = document.querySelector(
 );
 
 /* Add Card */
-export const addCardButton = document.querySelector(".add-card-button");
-export const addCardForm = document.querySelector(".add-card-form");
+export const profileAddButton = document.querySelector(".profile__add-button");
+export const addCardForm = document.querySelector("#modal-name-form");
 export const addNewCardModal = document.querySelector("#add-card-modal");
+export const addCardSubmit = addNewCardModal.querySelector(".modal__button");
 
 /* Preview Elements */
 export const previewImage = document.querySelector(".modal__preview-image");
