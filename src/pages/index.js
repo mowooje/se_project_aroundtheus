@@ -14,6 +14,8 @@ import {
   profileTitleInput,
   profileDescriptionInput,
   profileAddButton,
+  profileEditButton,
+  profileEditForm,
   addCardForm,
   addNewCardModal,
   previewImage,
@@ -151,14 +153,9 @@ function handleEditButtonClick() {
   profileEditModal.classList.add("modal_opened");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  profileEditForm = document.querySelector("#profile-edit-form");
-  profileEditButton = document.querySelector(".profile__edit-button");
-
-  if (profileEditButton) {
-    profileEditButton.addEventListener("click", handleEditButtonClick);
-  }
-});
+if (profileEditButton) {
+  profileEditButton.addEventListener("click", handleEditButtonClick);
+}
 
 const previewCardModal = new PopUpWithImage("#modal-preview");
 previewCardModal.setEventListeners();

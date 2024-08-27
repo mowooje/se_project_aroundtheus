@@ -36,6 +36,10 @@ export const config = {
 
 /* Profile Elements */
 export const profileEditModal = document.querySelector("#profile-edit-modal");
+export const profileEditButton = document.querySelector(
+  ".profile__edit-button"
+);
+export const profileEditForm = document.querySelector("#profile-edit-form");
 export const profileTitle = document.querySelector(".profile__title");
 export const profileDescription = document.querySelector(
   ".profile__description"
@@ -72,15 +76,3 @@ export const profileAvatarForm = document.querySelector(
 export const cardDeleteButton = document.querySelector(".card__trash-button");
 export const cardDeleteModal = document.querySelector("#delete-modal");
 export const cardDeleteForm = cardDeleteModal.querySelector(".modal__form");
-
-let profileEditButton;
-let profileEditForm;
-
-document.addEventListener("DOMContentLoaded", () => {
-  profileEditForm = document.querySelector("#profile-edit-form");
-  profileEditButton = document.querySelector(".profile__edit-button");
-
-  if (profileEditButton) {
-    profileEditButton.addEventListener("click", handleEditButtonClick);
-  }
-});
