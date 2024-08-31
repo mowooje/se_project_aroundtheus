@@ -64,13 +64,9 @@ export const previewDescription = document.querySelector(
 );
 
 /* Avatar Elements */
-export const profileAvatarButton = document.querySelector(
-  ".profile__avatar-button"
-);
+export const profileAvatarButton = document.querySelector(".avatar__button");
 export const profileAvatarModal = document.querySelector("#avatar-modal");
-export const profileAvatarForm = document.querySelector(
-  ".profile__avatar-form"
-);
+export const profileAvatarForm = document.querySelector(".modal__form");
 
 /* Delete Elements */
 export const cardDeleteButton = document.querySelector(".card__trash-button");

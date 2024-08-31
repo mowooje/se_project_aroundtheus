@@ -36,56 +36,56 @@ const cardListEl = document.querySelector(".cards__list");
 
 const cardSelector = "#card-template";
 
-const userInfo = new UserInfo({
-  profileTitle: ".profile__title",
-  profileDescription: ".profile__description",
-  avatarSelector: ".profile__image",
-});
+document.addEventListener("DOMContentLoaded", () => {
+  const userInfo = new UserInfo({
+    profileTitle: ".profile__title",
+    profileDescription: ".profile__description",
+    avatarSelector: ".profile__image",
+  });
 
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "b0f5599c-4007-4941-89b3-30100c4f8838",
-    "Content-Type": "application/json",
-  },
-});
+  const api = new Api({
+    baseUrl: "https://around-api.en.tripleten-services.com/v1",
+    headers: {
+      authorization: "b0f5599c-4007-4941-89b3-30100c4f8838",
+      "Content-Type": "application/json",
+    },
+  });
 
-let section;
+  let section;
 
-api;
-
-Promise.all([api.getInitialCards(), api.getUserInfo()])
-  .then(([cards, data]) => {
-    section = new Section(
-      {
-        items: cards,
-        renderer: (data) => {
-          const cardEl = renderCard(data);
-          section.addItem(cardEl);
+  Promise.all([api.getInitialCards(), api.getUserInfo()])
+    .then(([cards, data]) => {
+      section = new Section(
+        {
+          items: cards,
+          renderer: (data) => {
+            const cardEl = renderCard(data);
+            section.addItem(cardEl);
+          },
         },
-      },
-      ".cards__list"
-    );
-    section.renderItems();
+        ".cards__list"
+      );
+      section.renderItems();
 
-    userInfo.setUserInfo({
-      title: data.name,
-      description: data.about,
+      userInfo.setUserInfo({
+        title: data.name,
+        description: data.about,
+      });
+
+      userInfo.setAvatar({ avatar: data.avatar });
+    })
+    .catch((err) => {
+      console.log(err);
     });
 
-    userInfo.setAvatar({ avatar: data.avatar });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-if (profileAddButton) {
-  profileAddButton.addEventListener("click", () => {
-    addModal.open();
-  });
-} else {
-  console.error("profileAddButton not found in the DOM");
-}
+  if (profileAddButton) {
+    profileAddButton.addEventListener("click", () => {
+      addModal.open();
+    });
+  } else {
+    console.error("profileAddButton not found in the DOM");
+  }
+});
 
 /* Event Listener */
 profileEditButton.addEventListener("click", () => {
@@ -106,7 +106,8 @@ avatarFormValidator.enableValidation();
 const profileAvatarPopUp = new PopUpWithForm(
   "#avatar-modal",
   handleAvatarSubmit,
-  profileAvatarButton
+  profileAvatarButton,
+  config
 );
 
 profileAvatarButton.addEventListener("click", () => {
@@ -132,7 +133,7 @@ addModal.setEventListeners();
 function handleProfileEditSubmit(inputValues) {
   editModal.setLoading(true);
   api
-    .setUserInfo(title, description)
+    .setUserInfo(inputValues.title, inputValues.description)
     .then(() => {
       userInfo.setUserInfo(inputValues);
       editModal.close();
@@ -187,7 +188,7 @@ function handleAddCardSubmit(inputValues) {
   const link = inputValues.link;
   addModal.setLoading(true);
   api
-    .addCard(name, url)
+    .addCard(name, link)
     .then((data) => {
       const cardEl = renderCard({ name, link });
       cardSection.addItem(cardEl);
@@ -259,8 +260,13 @@ function handleLike(cardInstance) {
   }
 }
 
-const cardDeletePopUp = new PopUpWithConfirmation("#delete-modal");
-cardDeletePopUp.setEventListeners();
+document.addEventListener("DOMContentLoaded", () => {
+  const cardDeletePopUp = new PopUpWithConfirmation({
+    popUpSelector: "#delete-modal",
+  });
+
+  cardDeletePopUp.setEventListeners();
+});
 
 const cardSection = new Section(
   {
