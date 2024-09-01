@@ -130,6 +130,12 @@ const addModal = new PopUpWithForm(
 editModal.setEventListeners();
 addModal.setEventListeners();
 
+const cardDeletePopUp = new PopUpWithConfirmation({
+  popUpSelector: "#modal-delete-modal",
+});
+
+cardDeletePopUp.setEventListeners();
+
 function handleProfileEditSubmit(inputValues) {
   editModal.setLoading(true);
   api
@@ -260,9 +266,31 @@ function handleLike(cardInstance) {
   }
 }
 
+/*Delete card confirmation*/
+const deleteConfirmPopup = new PopUpWithConfirmation({
+  popUpSelector: "#modal-delete-modal", // Consistent naming
+});
+deleteConfirmPopup.setSubmitAction(() => {
+  deleteConfirmPopup.setLoading(true);
+  api
+    .deleteCard(cardId)
+    .then(() => {
+      cardElement.remove();
+      deleteConfirmPopup.close();
+    })
+    .catch((err) => {
+      console.error(`Error: ${err}`);
+    })
+    .finally(() => {
+      deleteConfirmPopup.setLoading(false);
+    });
+});
+
+deleteConfirmPopup.open();
+
 document.addEventListener("DOMContentLoaded", () => {
   const cardDeletePopUp = new PopUpWithConfirmation({
-    popUpSelector: "#delete-modal",
+    popUpSelector: "#modal-delete-modal",
   });
 
   cardDeletePopUp.setEventListeners();

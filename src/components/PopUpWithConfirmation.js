@@ -2,7 +2,6 @@ import PopUp from "./PopUp";
 
 export default class PopUpWithConfirmation extends PopUp {
   constructor({ popUpSelector }) {
-    // Ensure the popUpSelector points to a valid DOM element
     const popUpElement = document.querySelector(popUpSelector);
     if (!popUpElement) {
       throw new Error(`Element with selector "${popUpSelector}" not found.`);
@@ -10,7 +9,7 @@ export default class PopUpWithConfirmation extends PopUp {
 
     super({ popupSelector: popUpSelector });
 
-    this._popUpForm = this._popUpElement.querySelector(".modal__form");
+    this._popUpForm = popUpElement.querySelector(".modal__form");
     this._submitButton = this._popUpForm.querySelector(".modal__button");
     this._submitButtonText = this._submitButton.textContent;
   }

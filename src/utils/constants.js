@@ -44,11 +44,9 @@ export const profileTitle = document.querySelector(".profile__title");
 export const profileDescription = document.querySelector(
   ".profile__description"
 );
-export const profileTitleInput = document.querySelector(
-  ".profile__title-input"
-);
+export const profileTitleInput = document.querySelector("#profile-title-input");
 export const profileDescriptionInput = document.querySelector(
-  ".profile__description-input"
+  "#profile-description-input"
 );
 
 /* Add Card */
@@ -70,5 +68,5 @@ export const profileAvatarForm = document.querySelector(".modal__form");
 
 /* Delete Elements */
 export const cardDeleteButton = document.querySelector(".card__trash-button");
-export const cardDeleteModal = document.querySelector("#delete-modal");
+export const cardDeleteModal = document.querySelector("#modal-delete-modal");
 export const cardDeleteForm = cardDeleteModal.querySelector(".modal__form");

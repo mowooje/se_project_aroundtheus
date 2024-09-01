@@ -76,3 +76,17 @@
   opacity: 0.5;
   cursor: pointer;
 }
+
+#card-delete-title {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 13px;
+}
+
+@media screen and (max-width: 620px) {
+  #card-delete-form {
+    display: flex;
+    justify-content: center;
+    margin-left: 20px;
+  }
+}

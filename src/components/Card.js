@@ -23,7 +23,7 @@ export default class Card {
     this._cardElement
       .querySelector("#card__trash-button")
       .addEventListener("click", () => {
-        this._handleDeleteButton();
+        this._handleDeleteCard();
       });
 
     this._cardElement

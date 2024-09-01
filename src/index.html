@@ -196,16 +196,18 @@
     ></template>
 
     <!--Delete Modal-->
-    <div class="modal" id="delete-modal">
-      <div class="modal__container">
+    <div class="modal" id="modal-delete-modal">
+      <div class="modal__container modal__container_delete">
         <button
           class="modal__close"
           type="button"
           id="delete-card-modal-closed"
         ></button>
-        <form class="modal__form">
-          <h2 class="modal__title">Are you sure?</h2>
-          <button class="modal__button" type="submit">Yes</button>
+        <form class="modal__form" id="card-delete-form">
+          <h2 class="modal__title" id="card-delete-title">Are you sure?</h2>
+          <button class="modal__button" type="submit" id="modal-submit-button">
+            Yes
+          </button>
         </form>
       </div>
     </div>
