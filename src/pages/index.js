@@ -88,7 +88,7 @@ if (profileAddButton) {
 /* Event Listener */
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = userInfo.getUserInfo().title;
-  profileDescriptionInput.value = userInfo.getUserInfo().title;
+  profileDescriptionInput.value = userInfo.getUserInfo().description; // Corrected to use description
   editModal.open();
 });
 
@@ -181,7 +181,7 @@ function renderCard(cardData) {
     cardData,
     cardSelector,
     handleImageClick,
-    handleDeleteCard,
+    handleDeleteCard, // This now correctly passes the cardInstance to handleDeleteCard
     handleLike
   );
   return cardInstance.getView();
@@ -220,14 +220,15 @@ function handleAvatarSubmit(url) {
     });
 }
 
-function handleDeleteCard(card) {
+function handleDeleteCard(cardInstance) {
+  // CHANGED: Renamed argument to cardInstance
   cardDeletePopUp.open(); // Open the confirmation popup
   cardDeletePopUp.setSubmitAction(() => {
     cardDeletePopUp.setLoading(true, "Deleting...");
     api
-      .deleteCard(card._data._id) // Use the card's id to delete it from the server
+      .deleteCard(cardInstance._data._id) // CHANGED: Use cardInstance to access the card's ID
       .then(() => {
-        card.handleDeleteButton(); // Call the method to remove the card from the DOM
+        cardInstance.handleDeleteButton(); // CHANGED: Use cardInstance to call the delete method
         cardDeletePopUp.close(); // Close the confirmation popup
       })
       .catch((err) => {
@@ -261,29 +262,6 @@ function handleLike(cardInstance) {
       });
   }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  const cardDeletePopUp = new PopUpWithConfirmation({
-    popUpSelector: "#modal-delete-modal",
-  });
-  cardDeletePopUp.setSubmitAction(() => {
-    cardDeletePopUp.setLoading(true, "Deleting...");
-    api
-      .deleteCard(card._data._id)
-      .then(() => {
-        card.handleDeleteCard();
-        cardDeletePopUp.close();
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {
-        cardDeletePopUp.setLoading(false, "Yes");
-      });
-  });
-
-  cardDeletePopUp.setEventListeners();
-});
 
 /*Delete card confirmation*/
 const deleteConfirmPopup = new PopUpWithConfirmation({
