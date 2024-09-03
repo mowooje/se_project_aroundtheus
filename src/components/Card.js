@@ -14,26 +14,42 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._cardElement
-      .querySelector("#card__like-button")
-      .addEventListener("click", () => {
-        this._handleLikeIcon();
-      });
+    // Ensure that _cardElement is properly initialized before accessing its properties
+    if (!this._cardElement) {
+      console.error("Card element is not initialized.");
+      return;
+    }
 
-    this._cardElement
-      .querySelector("#card__trash-button")
-      .addEventListener("click", () => {
-        this._handleDeleteCard();
-      });
+    const deleteButton = this._cardElement.querySelector("#card__trash-button");
+    const cardImage = this._cardElement.querySelector("#card-image");
+    const likeButton = this._cardElement.querySelector("#card__like-button");
 
-    this._cardElement
-      .querySelector("#card-image")
-      .addEventListener("click", () => {
+    if (deleteButton) {
+      deleteButton.addEventListener("click", () => {
+        this._handleDeleteCard(this);
+      });
+    } else {
+      console.error("Delete button not found in the card element.");
+    }
+
+    if (cardImage) {
+      cardImage.addEventListener("click", () => {
         this._handleImageClick(this._data);
       });
+    } else {
+      console.error("Card image not found in the card element.");
+    }
+
+    if (likeButton) {
+      likeButton.addEventListener("click", () => {
+        this._handleLike(this);
+      });
+    } else {
+      console.error("Like button not found in the card element.");
+    }
   }
 
-  _handleDeleteButton() {
+  handleDeleteButton() {
     this._cardElement.remove();
     this._cardElement = null;
   }
@@ -45,12 +61,18 @@ export default class Card {
   }
 
   getView() {
-    this._cardElement = document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".card")
+    const cardTemplate = document.querySelector(this._cardSelector);
+    if (!cardTemplate) {
+      console.error(`Card template selector ${this._cardSelector} not found.`);
+      return null;
+    }
+
+    this._cardElement = cardTemplate.content
+      .querySelector(".card")
       .cloneNode(true);
     const cardImageEl = this._cardElement.querySelector("#card-image");
     const cardTitleEl = this._cardElement.querySelector("#card-title");
+
     cardImageEl.src = this._data.link;
     cardImageEl.alt = this._data.name;
     cardTitleEl.textContent = this._data.name;

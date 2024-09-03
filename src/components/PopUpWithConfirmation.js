@@ -12,6 +12,7 @@ export default class PopUpWithConfirmation extends PopUp {
     this._popUpForm = popUpElement.querySelector(".modal__form");
     this._submitButton = this._popUpForm.querySelector(".modal__button");
     this._submitButtonText = this._submitButton.textContent;
+    this._handleFormSubmit = null;
   }
 
   setSubmitAction(action) {
@@ -29,7 +30,11 @@ export default class PopUpWithConfirmation extends PopUp {
   setEventListeners() {
     this._popUpForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      this._handleFormSubmit();
+      if (typeof this._handleFormSubmit === "function") {
+        this._handleFormSubmit();
+      } else {
+        console.error("Submit action is not defined or not a function.");
+      }
     });
     super.setEventListeners();
   }

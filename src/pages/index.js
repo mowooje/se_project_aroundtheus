@@ -36,56 +36,54 @@ const cardListEl = document.querySelector(".cards__list");
 
 const cardSelector = "#card-template";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const userInfo = new UserInfo({
-    profileTitle: ".profile__title",
-    profileDescription: ".profile__description",
-    avatarSelector: ".profile__image",
-  });
-
-  const api = new Api({
-    baseUrl: "https://around-api.en.tripleten-services.com/v1",
-    headers: {
-      authorization: "b0f5599c-4007-4941-89b3-30100c4f8838",
-      "Content-Type": "application/json",
-    },
-  });
-
-  let section;
-
-  Promise.all([api.getInitialCards(), api.getUserInfo()])
-    .then(([cards, data]) => {
-      section = new Section(
-        {
-          items: cards,
-          renderer: (data) => {
-            const cardEl = renderCard(data);
-            section.addItem(cardEl);
-          },
-        },
-        ".cards__list"
-      );
-      section.renderItems();
-
-      userInfo.setUserInfo({
-        title: data.name,
-        description: data.about,
-      });
-
-      userInfo.setAvatar({ avatar: data.avatar });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-  if (profileAddButton) {
-    profileAddButton.addEventListener("click", () => {
-      addModal.open();
-    });
-  } else {
-    console.error("profileAddButton not found in the DOM");
-  }
+const userInfo = new UserInfo({
+  profileTitle: ".profile__title",
+  profileDescription: ".profile__description",
+  avatarSelector: ".profile__image",
 });
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "b0f5599c-4007-4941-89b3-30100c4f8838",
+    "Content-Type": "application/json",
+  },
+});
+
+let section;
+
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+  .then(([cards, data]) => {
+    section = new Section(
+      {
+        items: cards,
+        renderer: (data) => {
+          const cardEl = renderCard(data);
+          section.addItem(cardEl);
+        },
+      },
+      ".cards__list"
+    );
+    section.renderItems();
+
+    userInfo.setUserInfo({
+      title: data.name,
+      description: data.about,
+    });
+
+    userInfo.setAvatar({ avatar: data.avatar });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+if (profileAddButton) {
+  profileAddButton.addEventListener("click", () => {
+    addModal.open();
+  });
+} else {
+  console.error("profileAddButton not found in the DOM");
+}
 
 /* Event Listener */
 profileEditButton.addEventListener("click", () => {
@@ -179,25 +177,23 @@ function createCard(data) {
 }
 
 function renderCard(cardData) {
-  const addCard = new Card(
+  const cardInstance = new Card(
     cardData,
     cardSelector,
     handleImageClick,
     handleDeleteCard,
     handleLike
   );
-  return addCard.getView();
+  return cardInstance.getView();
 }
 
 function handleAddCardSubmit(inputValues) {
-  const name = inputValues.name;
-  const link = inputValues.link;
   addModal.setLoading(true);
   api
-    .addCard(name, link)
+    .addCard(inputValues) // Pass the entire inputValues object
     .then((data) => {
-      const cardEl = renderCard({ name, link });
-      cardSection.addItem(cardEl);
+      const cardEl = renderCard(data); // Render the card using the response data
+      section.addItem(cardEl);
       addModal.close();
     })
     .catch((err) => {
@@ -225,14 +221,14 @@ function handleAvatarSubmit(url) {
 }
 
 function handleDeleteCard(card) {
-  cardDeletePopUp.open();
+  cardDeletePopUp.open(); // Open the confirmation popup
   cardDeletePopUp.setSubmitAction(() => {
     cardDeletePopUp.setLoading(true, "Deleting...");
     api
-      .deleteCard(card.id)
+      .deleteCard(card._data._id) // Use the card's id to delete it from the server
       .then(() => {
-        card.handleDeleteCard();
-        cardDeletePopUp.close();
+        card.handleDeleteButton(); // Call the method to remove the card from the DOM
+        cardDeletePopUp.close(); // Close the confirmation popup
       })
       .catch((err) => {
         console.error(err);
@@ -266,6 +262,29 @@ function handleLike(cardInstance) {
   }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const cardDeletePopUp = new PopUpWithConfirmation({
+    popUpSelector: "#modal-delete-modal",
+  });
+  cardDeletePopUp.setSubmitAction(() => {
+    cardDeletePopUp.setLoading(true, "Deleting...");
+    api
+      .deleteCard(card._data._id)
+      .then(() => {
+        card.handleDeleteCard();
+        cardDeletePopUp.close();
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        cardDeletePopUp.setLoading(false, "Yes");
+      });
+  });
+
+  cardDeletePopUp.setEventListeners();
+});
+
 /*Delete card confirmation*/
 const deleteConfirmPopup = new PopUpWithConfirmation({
   popUpSelector: "#modal-delete-modal", // Consistent naming
@@ -285,24 +304,5 @@ deleteConfirmPopup.setSubmitAction(() => {
       deleteConfirmPopup.setLoading(false);
     });
 });
-
-deleteConfirmPopup.open();
-
-document.addEventListener("DOMContentLoaded", () => {
-  const cardDeletePopUp = new PopUpWithConfirmation({
-    popUpSelector: "#modal-delete-modal",
-  });
-
-  cardDeletePopUp.setEventListeners();
-});
-
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: renderCard,
-  },
-  ".cards__list"
-);
-cardSection.renderItems();
 
 /* ------------------------------------------------------------------------------- */
