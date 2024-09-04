@@ -68,5 +68,5 @@ export const profileAvatarForm = document.querySelector(".modal__form");
 
 /* Delete Elements */
 export const cardDeleteButton = document.querySelector(".card__trash-button");
-export const cardDeleteModal = document.querySelector("#modal-delete-modal");
+export const cardDeleteModal = document.querySelector("#delete-modal");
 export const cardDeleteForm = cardDeleteModal.querySelector(".modal__form");

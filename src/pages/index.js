@@ -104,7 +104,6 @@ avatarFormValidator.enableValidation();
 const profileAvatarPopUp = new PopUpWithForm(
   "#avatar-modal",
   handleAvatarSubmit,
-  profileAvatarButton,
   config
 );
 
@@ -129,7 +128,7 @@ editModal.setEventListeners();
 addModal.setEventListeners();
 
 const cardDeletePopUp = new PopUpWithConfirmation({
-  popUpSelector: "#modal-delete-modal",
+  popUpSelector: "#delete-modal",
 });
 
 cardDeletePopUp.setEventListeners();
@@ -265,7 +264,7 @@ function handleLike(cardInstance) {
 
 /*Delete card confirmation*/
 const deleteConfirmPopup = new PopUpWithConfirmation({
-  popUpSelector: "#modal-delete-modal", // Consistent naming
+  popUpSelector: "#delete-modal", // Consistent naming
 });
 deleteConfirmPopup.setSubmitAction(() => {
   deleteConfirmPopup.setLoading(true);

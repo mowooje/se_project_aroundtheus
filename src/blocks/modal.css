@@ -161,7 +161,7 @@
   font-weight: 400;
 }
 
-#modal-submit-button {
+/* #modal-submit-button {
   height: 50px;
   width: 100%;
   max-width: 358px;
@@ -183,7 +183,7 @@
   width: 430px;
   height: 181px;
   padding: 0px;
-}
+} */
 
 @media screen and (max-width: 620px) {
   .modal__container {
