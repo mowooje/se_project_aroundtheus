@@ -88,7 +88,7 @@ if (profileAddButton) {
 /* Event Listener */
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = userInfo.getUserInfo().title;
-  profileDescriptionInput.value = userInfo.getUserInfo().description; // Corrected to use description
+  profileDescriptionInput.value = userInfo.getUserInfo().description;
   editModal.open();
 });
 
@@ -180,7 +180,7 @@ function renderCard(cardData) {
     cardData,
     cardSelector,
     handleImageClick,
-    handleDeleteCard, // This now correctly passes the cardInstance to handleDeleteCard
+    handleDeleteCard,
     handleLike
   );
   return cardInstance.getView();
@@ -189,9 +189,9 @@ function renderCard(cardData) {
 function handleAddCardSubmit(inputValues) {
   addModal.setLoading(true);
   api
-    .addCard(inputValues) // Pass the entire inputValues object
+    .addCard(inputValues)
     .then((data) => {
-      const cardEl = renderCard(data); // Render the card using the response data
+      const cardEl = renderCard(data);
       section.addItem(cardEl);
       addModal.close();
     })
@@ -220,15 +220,14 @@ function handleAvatarSubmit(url) {
 }
 
 function handleDeleteCard(cardInstance) {
-  // CHANGED: Renamed argument to cardInstance
-  cardDeletePopUp.open(); // Open the confirmation popup
+  cardDeletePopUp.open();
   cardDeletePopUp.setSubmitAction(() => {
     cardDeletePopUp.setLoading(true, "Deleting...");
     api
-      .deleteCard(cardInstance._data._id) // CHANGED: Use cardInstance to access the card's ID
+      .deleteCard(cardInstance._data._id)
       .then(() => {
-        cardInstance.handleDeleteButton(); // CHANGED: Use cardInstance to call the delete method
-        cardDeletePopUp.close(); // Close the confirmation popup
+        cardInstance.handleDeleteButton();
+        cardDeletePopUp.close();
       })
       .catch((err) => {
         console.error(err);
@@ -244,17 +243,16 @@ function handleLike(cardInstance) {
     api
       .dislikeCard(cardInstance.id)
       .then((data) => {
-        cardInstance.setIsLiked(data.isLiked);
+        cardInstance.setIsLiked(false);
       })
       .catch((err) => {
         console.error(err);
       });
-  }
-  if (!cardInstance.isLiked) {
+  } else {
     api
       .likeCard(cardInstance.id)
       .then((data) => {
-        cardInstance.setIsLiked(data.isLiked);
+        cardInstance.setIsLiked(true);
       })
       .catch((err) => {
         console.error(err);
@@ -264,7 +262,7 @@ function handleLike(cardInstance) {
 
 /*Delete card confirmation*/
 const deleteConfirmPopup = new PopUpWithConfirmation({
-  popUpSelector: "#delete-modal", // Consistent naming
+  popUpSelector: "#delete-modal",
 });
 deleteConfirmPopup.setSubmitAction(() => {
   deleteConfirmPopup.setLoading(true);

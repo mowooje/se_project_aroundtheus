@@ -11,10 +11,12 @@ export default class Card {
     this._handleImageClick = handleImageClick;
     this._handleDeleteCard = handleDeleteCard;
     this._handleLike = handleLike;
+    this._cardElement = null;
+    this.isLiked = data.isLiked || false;
+    this.id = data._id;
   }
 
   _setEventListeners() {
-    // Ensure that _cardElement is properly initialized before accessing its properties
     if (!this._cardElement) {
       console.error("Card element is not initialized.");
       return;
@@ -28,25 +30,24 @@ export default class Card {
       deleteButton.addEventListener("click", () => {
         this._handleDeleteCard(this);
       });
-    } else {
-      console.error("Delete button not found in the card element.");
     }
 
     if (cardImage) {
       cardImage.addEventListener("click", () => {
         this._handleImageClick(this._data);
       });
-    } else {
-      console.error("Card image not found in the card element.");
     }
 
     if (likeButton) {
       likeButton.addEventListener("click", () => {
         this._handleLike(this);
       });
-    } else {
-      console.error("Like button not found in the card element.");
     }
+  }
+
+  setIsLiked(isLiked) {
+    this.isLiked = isLiked;
+    this._handleLikeIcon();
   }
 
   handleDeleteButton() {
