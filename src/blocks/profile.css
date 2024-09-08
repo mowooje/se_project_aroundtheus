@@ -76,36 +76,6 @@
   cursor: pointer;
 }
 
-.avatar__section {
-  position: relative;
-}
-
-.avatar__button {
-  background: transparent url(../images/avatar__button.svg) center no-repeat;
-  border: none;
-  position: absolute;
-  width: 26px;
-  height: 26px;
-  top: 50px;
-  left: 48px;
-  cursor: pointer;
-  opacity: 0;
-  background-size: cover;
-  transition: 0.3s ease-in-out;
-}
-
-.avatar__button:hover {
-  opacity: 0.6;
-}
-
-.modal__input_type_url {
-  margin-top: 45px;
-}
-
-.title__avatar {
-  margin-top: 0;
-}
-
 @media screen and (max-width: 1280px) {
   .profile__image {
     margin: 3.75px 10px 3.75px 10px;
