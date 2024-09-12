@@ -1,55 +1,31 @@
 export default class Card {
-  constructor(
-    data,
-    cardSelector,
-    handleImageClick,
-    handleDeleteCard,
-    handleLike
-  ) {
+  constructor(data, cardSelector, handleImageClick) {
     this._data = data;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
-    this._handleDeleteCard = handleDeleteCard;
-    this._handleLike = handleLike;
   }
 
   _setEventListeners() {
-    // Ensure that _cardElement is properly initialized before accessing its properties
-    if (!this._cardElement) {
-      console.error("Card element is not initialized.");
-      return;
-    }
-
-    const deleteButton = this._cardElement.querySelector("#card__trash-button");
-    const cardImage = this._cardElement.querySelector("#card-image");
-    const likeButton = this._cardElement.querySelector("#card__like-button");
-
-    if (deleteButton) {
-      deleteButton.addEventListener("click", () => {
-        this._handleDeleteCard(this);
+    this._cardElement
+      .querySelector("#card__like-button")
+      .addEventListener("click", () => {
+        this._handleLikeIcon();
       });
-    } else {
-      console.error("Delete button not found in the card element.");
-    }
 
-    if (cardImage) {
-      cardImage.addEventListener("click", () => {
+    this._cardElement
+      .querySelector("#card__trash-button")
+      .addEventListener("click", () => {
+        this._handleDeleteButton();
+      });
+
+    this._cardElement
+      .querySelector("#card-image")
+      .addEventListener("click", () => {
         this._handleImageClick(this._data);
       });
-    } else {
-      console.error("Card image not found in the card element.");
-    }
-
-    if (likeButton) {
-      likeButton.addEventListener("click", () => {
-        this._handleLike(this);
-      });
-    } else {
-      console.error("Like button not found in the card element.");
-    }
   }
 
-  handleDeleteButton() {
+  _handleDeleteButton() {
     this._cardElement.remove();
     this._cardElement = null;
   }
@@ -61,18 +37,12 @@ export default class Card {
   }
 
   getView() {
-    const cardTemplate = document.querySelector(this._cardSelector);
-    if (!cardTemplate) {
-      console.error(`Card template selector ${this._cardSelector} not found.`);
-      return null;
-    }
-
-    this._cardElement = cardTemplate.content
-      .querySelector(".card")
+    this._cardElement = document
+      .querySelector(this._cardSelector)
+      .content.querySelector(".card")
       .cloneNode(true);
     const cardImageEl = this._cardElement.querySelector("#card-image");
     const cardTitleEl = this._cardElement.querySelector("#card-title");
-
     cardImageEl.src = this._data.link;
     cardImageEl.alt = this._data.name;
     cardTitleEl.textContent = this._data.name;
