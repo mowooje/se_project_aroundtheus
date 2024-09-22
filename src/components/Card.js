@@ -80,6 +80,9 @@ export default class Card {
 
     this._setEventListeners();
 
+    if (this.isLiked) {
+      this._handleLikeIcon();
+    }
     return this._cardElement;
   }
 }

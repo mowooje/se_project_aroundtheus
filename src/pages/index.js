@@ -224,7 +224,7 @@ function handleDeleteCard(cardInstance) {
   cardDeletePopUp.setSubmitAction(() => {
     cardDeletePopUp.setLoading(true, "Deleting...");
     api
-      .deleteCard(cardInstance._data._id)
+      .deleteCard(cardInstance.id)
       .then(() => {
         cardInstance.handleDeleteButton();
         cardDeletePopUp.close();
@@ -261,23 +261,23 @@ function handleLike(cardInstance) {
 }
 
 /*Delete card confirmation*/
-const deleteConfirmPopup = new PopUpWithConfirmation({
-  popUpSelector: "#delete-modal",
-});
-deleteConfirmPopup.setSubmitAction(() => {
-  deleteConfirmPopup.setLoading(true);
-  api
-    .deleteCard(cardId)
-    .then(() => {
-      cardElement.remove();
-      deleteConfirmPopup.close();
-    })
-    .catch((err) => {
-      console.error(`Error: ${err}`);
-    })
-    .finally(() => {
-      deleteConfirmPopup.setLoading(false);
-    });
-});
+// const deleteConfirmPopup = new PopUpWithConfirmation({
+//   popUpSelector: "#delete-modal",
+// });
+// deleteConfirmPopup.setSubmitAction(() => {
+//   deleteConfirmPopup.setLoading(true);
+//   api
+//     .deleteCard(cardId)
+//     .then(() => {
+//       cardElement.remove();
+//       deleteConfirmPopup.close();
+//     })
+//     .catch((err) => {
+//       console.error(`Error: ${err}`);
+//     })
+//     .finally(() => {
+//       deleteConfirmPopup.setLoading(false);
+//     });
+// });
 
 /* ------------------------------------------------------------------------------- */
