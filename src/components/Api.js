@@ -52,7 +52,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(this.renderResult);
+    }).then(this._renderResult);
   }
 
   async likeCard(cardId) {
