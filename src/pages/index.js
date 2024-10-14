@@ -135,10 +135,11 @@ cardDeletePopUp.setEventListeners();
 
 function handleProfileEditSubmit(inputValues) {
   editModal.setLoading(true);
-  api
+  return api
     .setUserInfo(inputValues.title, inputValues.description)
     .then(() => {
       userInfo.setUserInfo(inputValues);
+      profileEditFormValidator.disableButton();
       editModal.close();
     })
     .catch((err) => {
@@ -193,6 +194,7 @@ function handleAddCardSubmit(inputValues) {
     .then((data) => {
       const cardEl = renderCard(data);
       section.addItem(cardEl);
+      addCardFormValidator.disableButton();
       addModal.close();
     })
     .catch((err) => {
@@ -209,6 +211,7 @@ function handleAvatarSubmit(url) {
     .updateAvatar(url)
     .then((data) => {
       userInfo.setAvatar(data);
+      avatarFormValidator.disableButton();
       profileAvatarPopUp.close();
     })
     .catch((err) => {

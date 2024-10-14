@@ -25,10 +25,17 @@ export default class PopUpWithForm extends PopUp {
     if (this._form) {
       this._form.addEventListener("submit", (e) => {
         e.preventDefault();
-        this._handleFormSubmit(this._getInputValues());
-        this._form.reset();
+        this._handleFormSubmit(this._getInputValues())
+          .then(() => {
+            this._form.reset();
+            this.close();
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       });
     } else {
+      console.error("Form not found");
     }
   }
 
