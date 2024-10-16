@@ -52,7 +52,6 @@ export default class PopUpWithForm extends PopUp {
       input.value = data[input.name];
     });
 
-    close();
     {
       this._popup.querySelector(".modal__form").reset();
       super.close();
