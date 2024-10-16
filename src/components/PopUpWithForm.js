@@ -25,14 +25,7 @@ export default class PopUpWithForm extends PopUp {
     if (this._form) {
       this._form.addEventListener("submit", (e) => {
         e.preventDefault();
-        this._handleFormSubmit(this._getInputValues())
-          .then(() => {
-            this._form.reset();
-            this.close();
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+        this._handleFormSubmit(this._getInputValues());
       });
     } else {
       console.error("Form not found");
@@ -51,10 +44,8 @@ export default class PopUpWithForm extends PopUp {
     this.inputValues.forEach((input) => {
       input.value = data[input.name];
     });
-
-    {
-      this._popup.querySelector(".modal__form").reset();
-      super.close();
-    }
+  }
+  resetForm() {
+    this._form.reset();
   }
 }

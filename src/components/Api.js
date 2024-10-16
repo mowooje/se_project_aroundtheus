@@ -24,10 +24,17 @@ export default class Api {
   }
 
   async addCard({ name, link }) {
+    if (!name || !link) {
+      return Promise.reject("Error: 'name' and 'link' are required fields.");
+    }
+
     const res = await fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({ name, link }),
+      body: JSON.stringify({
+        name: name,
+        link: link,
+      }),
     });
     return this._renderResult(res);
   }
@@ -40,12 +47,13 @@ export default class Api {
     return this._renderResult(res);
   }
 
-  setUserInfo(name, about) {
-    return fetch(`${this._baseUrl}/users/me`, {
+  async updateUserInfo({ name, about }) {
+    const res = await fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({ name: name, about: about }),
+      body: JSON.stringify({ name, about }),
     });
+    return this._renderResult(res);
   }
 
   deleteCard(cardId) {

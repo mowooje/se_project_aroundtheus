@@ -137,11 +137,13 @@ cardDeletePopUp.setEventListeners();
 
 function handleProfileEditSubmit(inputValues) {
   editModal.setLoading(true);
-  return api
-    .setUserInfo(inputValues.title, inputValues.description)
-    .then(() => {
-      userInfo.setUserInfo(inputValues);
-      profileEditFormValidator.disableButton();
+  api
+    .updateUserInfo(inputValues)
+    .then((data) => {
+      userInfo.setUserInfo({
+        title: data.name,
+        description: data.about,
+      });
       editModal.close();
     })
     .catch((err) => {
@@ -183,11 +185,23 @@ function renderCard(cardData) {
 
 function handleAddCardSubmit(inputValues) {
   addModal.setLoading(true);
+  const cardData = {
+    name: inputValues.name.trim(),
+    link: inputValues.link.trim(),
+  };
+
+  if (!cardData.name || !cardData.link) {
+    console.error("Name and link are required fields.");
+    addModal.setLoading(false);
+    return;
+  }
+
   api
-    .addCard(inputValues)
+    .addCard(cardData)
     .then((data) => {
       const cardEl = renderCard(data);
       section.addItem(cardEl);
+      addModal.resetForm();
       addCardFormValidator.disableButton();
       addModal.close();
     })
@@ -256,25 +270,3 @@ function handleLike(cardInstance) {
       });
   }
 }
-
-/*Delete card confirmation*/
-// const deleteConfirmPopup = new PopUpWithConfirmation({
-//   popUpSelector: "#delete-modal",
-// });
-// deleteConfirmPopup.setSubmitAction(() => {
-//   deleteConfirmPopup.setLoading(true);
-//   api
-//     .deleteCard(cardId)
-//     .then(() => {
-//       cardElement.remove();
-//       deleteConfirmPopup.close();
-//     })
-//     .catch((err) => {
-//       console.error(`Error: ${err}`);
-//     })
-//     .finally(() => {
-//       deleteConfirmPopup.setLoading(false);
-//     });
-// });
-
-/* ------------------------------------------------------------------------------- */
