@@ -156,14 +156,6 @@ function handleImageClick(name, link) {
   previewCardModal.open(name, link);
 }
 
-function handleEditButtonClick() {
-  profileEditModal.classList.add("modal_opened");
-}
-
-if (profileEditButton) {
-  profileEditButton.addEventListener("click", handleEditButtonClick);
-}
-
 const previewCardModal = new PopUpWithImage("#modal-preview");
 previewCardModal.setEventListeners();
 
