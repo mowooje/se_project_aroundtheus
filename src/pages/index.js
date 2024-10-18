@@ -87,12 +87,11 @@ if (profileAddButton) {
 
 /* Event Listener */
 profileEditButton.addEventListener("click", () => {
+  const { description, title } = userInfo.getUserInfo();
+  profileTitleInput.value = title;
+  profileDescriptionInput.value = description;
   editModal.open();
 });
-
-const { description, title } = userInfo.getUserInfo();
-profileTitleInput.value = title;
-profileDescriptionInput.value = description;
 
 const profileEditFormValidator = new FormValidator(config, profileEditForm);
 const addCardFormValidator = new FormValidator(config, addCardForm);
