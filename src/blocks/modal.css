@@ -161,6 +161,10 @@
   font-weight: 400;
 }
 
+.modal__button-delete {
+  margin-top: 0;
+}
+
 @media screen and (max-width: 620px) {
   .modal__container {
     width: 100%;
