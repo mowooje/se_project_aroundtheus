@@ -47,11 +47,11 @@ export default class Api {
     return this._renderResult(res);
   }
 
-  async updateUserInfo({ name, about }) {
+  async updateUserInfo({ title, description }) {
     const res = await fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({ name, about }),
+      body: JSON.stringify({ name: title, about: description }),
     });
     return this._renderResult(res);
   }
